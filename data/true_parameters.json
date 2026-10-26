@@ -1,0 +1,159 @@
+{
+  "generator_settings": {
+    "seed_segment_effects": 2024,
+    "seed_accounts": 7,
+    "n_cohorts": 12,
+    "segment_sizes": {
+      "Construction": {
+        "Micro": 600,
+        "Small": 260,
+        "Medium": 70
+      },
+      "Retail": {
+        "Micro": 520,
+        "Small": 210,
+        "Medium": 28
+      },
+      "Professional Services": {
+        "Micro": 450,
+        "Small": 300,
+        "Medium": 90
+      },
+      "Hospitality": {
+        "Micro": 240,
+        "Small": 80,
+        "Medium": 22
+      }
+    },
+    "cohort_growth": 0.15,
+    "default": {
+      "intercept": -2.944,
+      "industry_effect": {
+        "Construction": 0.35,
+        "Retail": 0.1,
+        "Professional Services": -0.45,
+        "Hospitality": 0.6
+      },
+      "size_effect": {
+        "Micro": 0.3,
+        "Small": 0.0,
+        "Medium": -0.35
+      },
+      "segment_noise_sd": 0.15
+    },
+    "activation": {
+      "intercept": 0.847,
+      "industry_effect": {
+        "Construction": -0.1,
+        "Retail": 0.0,
+        "Professional Services": 0.3,
+        "Hospitality": -0.3
+      },
+      "size_effect": {
+        "Micro": -0.3,
+        "Small": 0.0,
+        "Medium": 0.35
+      },
+      "segment_noise_sd": 0.15
+    },
+    "median_monthly_spend": {
+      "Micro": 1200,
+      "Small": 3500,
+      "Medium": 9000
+    },
+    "industry_spend_multiplier": {
+      "Construction": 1.2,
+      "Retail": 1.0,
+      "Professional Services": 0.8,
+      "Hospitality": 0.9
+    },
+    "spend_log_sd": 0.6,
+    "launch_credit_limit": {
+      "Micro": 2500,
+      "Small": 6000,
+      "Medium": 15000
+    },
+    "utilisation_beta_performing": [
+      3.0,
+      7.0
+    ],
+    "utilisation_beta_defaulter": [
+      6.0,
+      2.0
+    ]
+  },
+  "true_segment_rates": [
+    {
+      "segment": "Construction | Micro",
+      "n_accounts": 600,
+      "true_default_rate": 0.10530033713839962,
+      "true_activation_rate": 0.5697527483764365
+    },
+    {
+      "segment": "Construction | Small",
+      "n_accounts": 260,
+      "true_default_rate": 0.08724780725218859,
+      "true_activation_rate": 0.7250518904183159
+    },
+    {
+      "segment": "Construction | Medium",
+      "n_accounts": 70,
+      "true_default_rate": 0.05885657072712811,
+      "true_activation_rate": 0.7510718203558904
+    },
+    {
+      "segment": "Retail | Micro",
+      "n_accounts": 520,
+      "true_default_rate": 0.06356739175885115,
+      "true_activation_rate": 0.6612182825684965
+    },
+    {
+      "segment": "Retail | Small",
+      "n_accounts": 210,
+      "true_default_rate": 0.045091575405240364,
+      "true_activation_rate": 0.6548747438192069
+    },
+    {
+      "segment": "Retail | Medium",
+      "n_accounts": 28,
+      "true_default_rate": 0.0397753250628849,
+      "true_activation_rate": 0.7561237981047251
+    },
+    {
+      "segment": "Professional Services | Micro",
+      "n_accounts": 450,
+      "true_default_rate": 0.04904178833394049,
+      "true_activation_rate": 0.6577618857999532
+    },
+    {
+      "segment": "Professional Services | Small",
+      "n_accounts": 300,
+      "true_default_rate": 0.034971574595860096,
+      "true_activation_rate": 0.7370415431127841
+    },
+    {
+      "segment": "Professional Services | Medium",
+      "n_accounts": 90,
+      "true_default_rate": 0.030106149966197406,
+      "true_activation_rate": 0.8365062818606593
+    },
+    {
+      "segment": "Hospitality | Micro",
+      "n_accounts": 240,
+      "true_default_rate": 0.1265986346925778,
+      "true_activation_rate": 0.5062278782052293
+    },
+    {
+      "segment": "Hospitality | Small",
+      "n_accounts": 80,
+      "true_default_rate": 0.09551900441012239,
+      "true_activation_rate": 0.6146464679244933
+    },
+    {
+      "segment": "Hospitality | Medium",
+      "n_accounts": 22,
+      "true_default_rate": 0.05712464940286485,
+      "true_activation_rate": 0.7153615469524925
+    }
+  ]
+}
