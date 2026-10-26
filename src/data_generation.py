@@ -237,8 +237,12 @@ def save_outputs(out_dir="data", params=TRUE_PARAMS):
     return observed, truth, seg
 
 
-if __name__ == "__main__":
+def main():
     project_root = Path(__file__).resolve().parents[1]
     observed, truth, seg = save_outputs(project_root / "data")
     print(f"Accounts: {len(observed):,}")
     print(seg[["segment", "n_accounts", "true_default_rate", "true_activation_rate"]].round(3))
+
+
+if __name__ == "__main__":
+    main()
