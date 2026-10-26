@@ -4,6 +4,9 @@ A prior predictive check asks: before seeing any outcomes, what does the
 model think the world looks like? We draw parameters from the priors, simulate
 data from them, and check the results are plausible for an SME card.
 
+The checks run on the same hierarchical model that is fitted in Stage 3
+(model.build_model), so what is checked here is what gets used.
+
 Run:  python src/prior_checks.py
 Writes figures/prior_*.png and prints summary numbers.
 """
@@ -15,8 +18,9 @@ import numpy as np
 import pandas as pd
 import pymc as pm
 
+from model import build_model, prepare_data, segment_frame
 from plotting import COLORS, PRIOR_COLORS, set_style
-from priors import PRIORS, add_segment_rates, sample_segment_rates_numpy
+from priors import PRIORS, sample_flat_rates_numpy, sample_segment_rates_numpy
 
 ROOT = Path(__file__).resolve().parents[1]
 FIG_DIR = ROOT / "figures"
@@ -26,49 +30,15 @@ SEED = 11
 
 def compare_candidate_priors(rng, n=100_000):
     """Implied segment default rates under three candidate priors."""
-    p = PRIORS["default"]
+    seg = segment_frame()
+    chosen = sample_segment_rates_numpy(
+        PRIORS["default"], n // len(seg), rng, seg["industry_idx"].to_numpy(), seg["size_idx"].to_numpy()
+    )
     return {
-        "Vague: Normal(0, 10) on log-odds": sample_segment_rates_numpy(0.0, 10.0, 0.0, n, rng),
-        "Generic: Normal(0, 1.5) on log-odds": sample_segment_rates_numpy(0.0, 1.5, 0.0, n, rng),
-        "Chosen: hierarchical, centred on 5%": sample_segment_rates_numpy(
-            p["mu_mean"], p["mu_sd"], p["sigma_sd"], n, rng
-        ),
+        "Vague: Normal(0, 10) on log-odds": sample_flat_rates_numpy(0.0, 10.0, n, rng),
+        "Generic: Normal(0, 1.5) on log-odds": sample_flat_rates_numpy(0.0, 1.5, n, rng),
+        "Chosen: hierarchical, centred on 5%": chosen.ravel(),
     }
-
-
-def build_prior_model(accounts):
-    """Priors plus a provisional likelihood using this portfolio's structure.
-
-    Activation: each account whose 60-day window has closed activates with its
-    segment's activation rate.
-
-    Default: each activated account shows a default by the snapshot with
-    probability default_rate * (months observed / 12). This assumes default
-    timing is spread evenly over the year. How to handle this censoring is a
-    Stage 3 decision; it is used here only to see what the priors imply.
-    """
-    segments = sorted(accounts["segment"].unique())
-    seg_code = {s: i for i, s in enumerate(segments)}
-
-    known = accounts[accounts["activated_60d"].notna()]
-    activated = known[known["activated_60d"] == 1]
-
-    with pm.Model(coords={"segment": segments}) as model:
-        act_rate = add_segment_rates("activation", PRIORS["activation"])
-        def_rate = add_segment_rates("default", PRIORS["default"])
-
-        pm.Bernoulli(
-            "activated",
-            p=act_rate[known["segment"].map(seg_code).to_numpy()],
-            observed=known["activated_60d"].astype(int).to_numpy(),
-        )
-        pm.Bernoulli(
-            "defaulted",
-            p=def_rate[activated["segment"].map(seg_code).to_numpy()]
-            * activated["exposure_fraction"].to_numpy(),
-            observed=activated["defaulted"].to_numpy(),
-        )
-    return model, segments
 
 
 def plot_candidate_priors(candidates, path):
@@ -91,14 +61,16 @@ def plot_candidate_priors(candidates, path):
     plt.close(fig)
 
 
-def plot_chosen_priors(prior, observed_counts, path):
-    def_rates = prior.prior["default_rate"].values.ravel()
+def plot_chosen_priors(prior, data, path):
+    seg_rates = prior.prior["default_rate"].values.reshape(-1, len(data["segments"]))
+    def_rates = seg_rates.ravel()
     act_rates = prior.prior["activation_rate"].values.ravel()
-    # Riskiest vs safest segment within each draw: a check on the spread prior.
-    seg_rates = prior.prior["default_rate"].values.reshape(-1, prior.prior["default_rate"].shape[-1])
+    # Riskiest vs safest segment within each draw: a check on the spread priors.
     spread_ratio = seg_rates.max(axis=1) / seg_rates.min(axis=1)
     pp_defaults = prior.prior_predictive["defaulted"].values.reshape(N_DRAWS, -1).sum(axis=1)
-    pp_activated = prior.prior_predictive["activated"].values.reshape(N_DRAWS, -1).mean(axis=1)
+    pp_activated = prior.prior_predictive["activated"].values.reshape(N_DRAWS, -1).sum(axis=1)
+    pp_activation_share = pp_activated / data["act_n"].sum()
+    observed_defaults = int(data["def_k"].sum())
 
     fig, axes = plt.subplots(2, 2, figsize=(11, 7.5))
     color = COLORS["hierarchical"]
@@ -127,9 +99,9 @@ def plot_chosen_priors(prior, observed_counts, path):
     ax = axes[1, 1]
     ax.hist(pp_defaults, bins=np.arange(0, np.percentile(pp_defaults, 99.5) + 10, 5), color=color,
             edgecolor="#fcfcfb", linewidth=0.8)
-    ax.axvline(observed_counts["defaults"], color=COLORS["observed"], lw=2)
-    ax.text(observed_counts["defaults"], ax.get_ylim()[1] * 0.95,
-            f"  Observed in simulated data: {observed_counts['defaults']}",
+    ax.axvline(observed_defaults, color=COLORS["observed"], lw=2)
+    ax.text(observed_defaults, ax.get_ylim()[1] * 0.95,
+            f"  Observed in simulated data: {observed_defaults}",
             color="#0b0b0b", fontsize=9, va="top")
     ax.set_title("Visible defaults this portfolio would show by month 12")
     ax.set_xlabel("Number of defaults (all segments)")
@@ -147,7 +119,9 @@ def plot_chosen_priors(prior, observed_counts, path):
         "activation_rate_quantiles": np.quantile(act_rates, [0.025, 0.5, 0.975]),
         "spread_ratio_quantiles": np.quantile(spread_ratio, [0.05, 0.5, 0.95]),
         "pp_defaults_quantiles": np.quantile(pp_defaults, [0.025, 0.5, 0.975]),
-        "pp_activation_share_quantiles": np.quantile(pp_activated, [0.025, 0.5, 0.975]),
+        "pp_activation_share_quantiles": np.quantile(pp_activation_share, [0.025, 0.5, 0.975]),
+        "observed_defaults": observed_defaults,
+        "observed_activation_share": data["act_k"].sum() / data["act_n"].sum(),
     }
 
 
@@ -163,21 +137,14 @@ def main():
     for label, draws in candidates.items():
         print(f"  {label:40s} {np.mean(draws <= 0.20):.1%}")
 
-    model, _ = build_prior_model(accounts)
-    with model:
+    data = prepare_data(accounts)
+    with build_model(data, pooling="partial"):
         prior = pm.sample_prior_predictive(draws=N_DRAWS, random_seed=SEED)
 
-    known = accounts[accounts["activated_60d"].notna()]
-    observed_counts = {
-        "defaults": int(accounts["defaulted"].sum()),
-        "activation_share": float(known["activated_60d"].mean()),
-    }
-    summary = plot_chosen_priors(prior, observed_counts, FIG_DIR / "prior_predictive_checks.png")
+    summary = plot_chosen_priors(prior, data, FIG_DIR / "prior_predictive_checks.png")
     print("\nChosen priors:")
     for k, v in summary.items():
         print(f"  {k:32s} {np.round(v, 3)}")
-    print(f"  observed defaults (for reference)  {observed_counts['defaults']}")
-    print(f"  observed activation share          {observed_counts['activation_share']:.3f}")
 
 
 if __name__ == "__main__":
