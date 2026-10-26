@@ -1,0 +1,73 @@
+outcome,model,segment,n_accounts,error
+activation,complete,Construction | Medium,70,-0.10704844221259777
+activation,complete,Construction | Micro,600,0.07427062976685607
+activation,complete,Construction | Small,260,-0.08102851227502327
+activation,complete,Hospitality | Medium,22,-0.07133816880919995
+activation,complete,Hospitality | Micro,240,0.13779549993806328
+activation,complete,Hospitality | Small,80,0.0293769102187993
+activation,complete,Professional Services | Medium,90,-0.19248290371736676
+activation,complete,Professional Services | Micro,450,-0.013738507656660615
+activation,complete,Professional Services | Small,300,-0.09301816496949154
+activation,complete,Retail | Medium,28,-0.11210041996143247
+activation,complete,Retail | Micro,520,-0.017194904425203873
+activation,complete,Retail | Small,210,-0.01085136567591426
+activation,none,Construction | Medium,70,-0.010692884486271259
+activation,none,Construction | Micro,600,-0.009283071126894176
+activation,none,Construction | Small,260,-0.005274289437887459
+activation,none,Hospitality | Medium,22,-0.03268758710586996
+activation,none,Hospitality | Micro,240,-0.014044522766866957
+activation,none,Hospitality | Small,80,-0.004797264173210719
+activation,none,Professional Services | Medium,90,-0.006475238146461559
+activation,none,Professional Services | Micro,450,0.00030253115533329655
+activation,none,Professional Services | Small,300,-0.005594913088272641
+activation,none,Retail | Medium,28,-0.011076655146745057
+activation,none,Retail | Micro,520,-0.005606581691862461
+activation,none,Retail | Small,210,-0.0023248751972206384
+activation,partial,Construction | Medium,70,-0.0077156373149876
+activation,partial,Construction | Micro,600,-0.0016266386841678859
+activation,partial,Construction | Small,260,-0.01968744835912199
+activation,partial,Hospitality | Medium,22,-0.021120859426609212
+activation,partial,Hospitality | Micro,240,0.002015748737041878
+activation,partial,Hospitality | Small,80,0.0034422808876555357
+activation,partial,Professional Services | Medium,90,-0.03596923909009992
+activation,partial,Professional Services | Micro,450,-0.0005576805674591068
+activation,partial,Professional Services | Small,300,-0.007246618350365669
+activation,partial,Retail | Medium,28,-0.0013469950603641311
+activation,partial,Retail | Micro,520,-0.013977339354716784
+activation,partial,Retail | Small,210,0.01570189392349941
+default,complete,Construction | Medium,70,0.012279918594528132
+default,complete,Construction | Micro,600,-0.03416384781674338
+default,complete,Construction | Small,260,-0.01611131793053234
+default,complete,Hospitality | Medium,22,0.014011839918791394
+default,complete,Hospitality | Micro,240,-0.05546214537092155
+default,complete,Hospitality | Small,80,-0.024382515088466138
+default,complete,Professional Services | Medium,90,0.04103033935545884
+default,complete,Professional Services | Micro,450,0.022094700987715758
+default,complete,Professional Services | Small,300,0.03616491472579615
+default,complete,Retail | Medium,28,0.03136116425877135
+default,complete,Retail | Micro,520,0.007569097562805095
+default,complete,Retail | Small,210,0.02604491391641588
+default,none,Construction | Medium,70,0.0032400461166379345
+default,none,Construction | Micro,600,-0.005345863270669124
+default,none,Construction | Small,260,0.005011601852635357
+default,none,Hospitality | Medium,22,0.0003019460968149236
+default,none,Hospitality | Micro,240,0.0043654087927055465
+default,none,Hospitality | Small,80,0.008359668708113771
+default,none,Professional Services | Medium,90,0.010931332121392717
+default,none,Professional Services | Micro,450,0.006073476678821707
+default,none,Professional Services | Small,300,-0.00013336555424835384
+default,none,Retail | Medium,28,0.024445001623532064
+default,none,Retail | Micro,520,-0.0006504839538853918
+default,none,Retail | Small,210,0.009624042862982676
+default,partial,Construction | Medium,70,0.012261558612061785
+default,partial,Construction | Micro,600,-0.011937595765140918
+default,partial,Construction | Small,260,-0.004582276991875243
+default,partial,Hospitality | Medium,22,0.020604620600304633
+default,partial,Hospitality | Micro,240,-0.02117486581612347
+default,partial,Hospitality | Small,80,-0.007542708633748331
+default,partial,Professional Services | Medium,90,0.016720030282862116
+default,partial,Professional Services | Micro,450,0.008827472460242578
+default,partial,Professional Services | Small,300,0.01275917508732933
+default,partial,Retail | Medium,28,0.01698563458681861
+default,partial,Retail | Micro,520,0.0034923408291280796
+default,partial,Retail | Small,210,0.014729798208351113
