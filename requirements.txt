@@ -1,8 +1,10 @@
-numpy>=1.26
-pandas>=2.1
-scipy>=1.11
-matplotlib>=3.8
-pymc>=5.16
-arviz>=0.18
+# Tested with Python 3.13. PyMC 6 and ArviZ 1.x have different APIs from
+# earlier versions, so the upper bounds matter.
+numpy>=2.0
+pandas>=2.2
+scipy>=1.13
+matplotlib>=3.9
+pymc>=6.3,<7
+arviz>=1.3,<2
 pytest>=8.0
 jupyter>=1.0
