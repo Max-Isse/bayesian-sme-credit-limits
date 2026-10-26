@@ -113,12 +113,15 @@ def build_model(data, pooling="partial", priors=PRIORS):
     return model
 
 
-def fit(model, draws=1000, tune=1000, chains=4, target_accept=0.95, random_seed=42):
+def fit(model, draws=1000, tune=1000, chains=4, target_accept=0.95, random_seed=42, nuts_sampler="pymc"):
     """Sample the posterior with NUTS.
 
     target_accept=0.95 (default 0.8) makes the sampler take smaller steps.
     That is slower but avoids divergences in the narrow regions that
     hierarchical models create when a group spread (sigma) is close to zero.
+
+    nuts_sampler="nutpie" runs the same NUTS algorithm in Rust. It has much
+    less per-step overhead, which matters when fitting many times (Stage 5).
     """
     with model:
         return pm.sample(
@@ -127,6 +130,7 @@ def fit(model, draws=1000, tune=1000, chains=4, target_accept=0.95, random_seed=
             chains=chains,
             target_accept=target_accept,
             random_seed=random_seed,
+            nuts_sampler=nuts_sampler,
             progressbar=False,
         )
 

@@ -1,0 +1,144 @@
+segment,accounts,visible_defaults,month
+Construction | Medium,9,0,1
+Construction | Micro,27,0,1
+Construction | Small,11,0,1
+Hospitality | Micro,10,0,1
+Hospitality | Small,2,0,1
+Professional Services | Medium,5,0,1
+Professional Services | Micro,20,0,1
+Professional Services | Small,10,0,1
+Retail | Medium,3,0,1
+Retail | Micro,14,0,1
+Retail | Small,10,0,1
+Construction | Medium,14,1,2
+Construction | Micro,54,0,2
+Construction | Small,25,0,2
+Hospitality | Medium,3,0,2
+Hospitality | Micro,26,0,2
+Hospitality | Small,6,0,2
+Professional Services | Medium,6,0,2
+Professional Services | Micro,42,0,2
+Professional Services | Small,26,0,2
+Retail | Medium,4,1,2
+Retail | Micro,51,1,2
+Retail | Small,19,1,2
+Construction | Medium,19,1,3
+Construction | Micro,86,1,3
+Construction | Small,47,1,3
+Hospitality | Medium,4,0,3
+Hospitality | Micro,37,0,3
+Hospitality | Small,12,0,3
+Professional Services | Medium,7,0,3
+Professional Services | Micro,65,0,3
+Professional Services | Small,42,0,3
+Retail | Medium,4,1,3
+Retail | Micro,81,1,3
+Retail | Small,31,1,3
+Construction | Medium,24,1,4
+Construction | Micro,134,3,4
+Construction | Small,64,1,4
+Hospitality | Medium,7,0,4
+Hospitality | Micro,55,0,4
+Hospitality | Small,13,0,4
+Professional Services | Medium,15,0,4
+Professional Services | Micro,92,0,4
+Professional Services | Small,61,1,4
+Retail | Medium,7,1,4
+Retail | Micro,108,1,4
+Retail | Small,48,1,4
+Construction | Medium,27,1,5
+Construction | Micro,167,3,5
+Construction | Small,89,1,5
+Hospitality | Medium,9,0,5
+Hospitality | Micro,73,0,5
+Hospitality | Small,20,0,5
+Professional Services | Medium,21,0,5
+Professional Services | Micro,131,1,5
+Professional Services | Small,93,2,5
+Retail | Medium,10,1,5
+Retail | Micro,143,3,5
+Retail | Small,67,1,5
+Construction | Medium,34,1,6
+Construction | Micro,212,3,6
+Construction | Small,110,2,6
+Hospitality | Medium,10,0,6
+Hospitality | Micro,89,0,6
+Hospitality | Small,22,0,6
+Professional Services | Medium,24,0,6
+Professional Services | Micro,169,1,6
+Professional Services | Small,115,3,6
+Retail | Medium,13,1,6
+Retail | Micro,187,3,6
+Retail | Small,87,1,6
+Construction | Medium,38,1,7
+Construction | Micro,268,4,7
+Construction | Small,132,3,7
+Hospitality | Medium,14,0,7
+Hospitality | Micro,112,0,7
+Hospitality | Small,33,0,7
+Professional Services | Medium,32,0,7
+Professional Services | Micro,201,2,7
+Professional Services | Small,134,3,7
+Retail | Medium,17,1,7
+Retail | Micro,231,3,7
+Retail | Small,110,1,7
+Construction | Medium,44,1,8
+Construction | Micro,324,6,8
+Construction | Small,151,4,8
+Hospitality | Medium,14,0,8
+Hospitality | Micro,134,0,8
+Hospitality | Small,41,0,8
+Professional Services | Medium,40,0,8
+Professional Services | Micro,249,2,8
+Professional Services | Small,157,3,8
+Retail | Medium,19,1,8
+Retail | Micro,287,4,8
+Retail | Small,129,1,8
+Construction | Medium,50,1,9
+Construction | Micro,389,9,9
+Construction | Small,176,6,9
+Hospitality | Medium,17,0,9
+Hospitality | Micro,158,1,9
+Hospitality | Small,53,1,9
+Professional Services | Medium,50,0,9
+Professional Services | Micro,289,2,9
+Professional Services | Small,180,3,9
+Retail | Medium,19,1,9
+Retail | Micro,337,5,9
+Retail | Small,143,1,9
+Construction | Medium,55,1,10
+Construction | Micro,459,11,10
+Construction | Small,209,6,10
+Hospitality | Medium,17,0,10
+Hospitality | Micro,182,1,10
+Hospitality | Small,61,1,10
+Professional Services | Medium,64,0,10
+Professional Services | Micro,335,2,10
+Professional Services | Small,220,3,10
+Retail | Medium,23,1,10
+Retail | Micro,393,5,10
+Retail | Small,169,2,10
+Construction | Medium,62,1,11
+Construction | Micro,532,15,11
+Construction | Small,231,7,11
+Hospitality | Medium,21,0,11
+Hospitality | Micro,206,3,11
+Hospitality | Small,70,2,11
+Professional Services | Medium,78,0,11
+Professional Services | Micro,394,3,11
+Professional Services | Small,257,4,11
+Retail | Medium,25,1,11
+Retail | Micro,448,5,11
+Retail | Small,195,2,11
+Construction | Medium,70,2,12
+Construction | Micro,600,17,12
+Construction | Small,260,8,12
+Hospitality | Medium,22,0,12
+Hospitality | Micro,240,4,12
+Hospitality | Small,80,2,12
+Professional Services | Medium,90,0,12
+Professional Services | Micro,450,5,12
+Professional Services | Small,300,6,12
+Retail | Medium,28,1,12
+Retail | Micro,520,8,12
+Retail | Small,210,2,12
