@@ -1,0 +1,10 @@
+model,statistic,observed,replicated_median,p_value
+complete,Total visible defaults,52.0,51.0,0.49425
+complete,Spread of segment default rates (SD),0.01788466787028021,0.01937350979861467,0.63875
+complete,Spread of segment activation rates (SD),0.11469843870864956,0.04783609186664643,0.00125
+none,Total visible defaults,52.0,52.0,0.525
+none,Spread of segment default rates (SD),0.01788466787028021,0.026879134960123785,0.92825
+none,Spread of segment activation rates (SD),0.11469843870864956,0.1273743665260989,0.79275
+partial,Total visible defaults,52.0,51.0,0.4895
+partial,Spread of segment default rates (SD),0.01788466787028021,0.021794303415548322,0.7855
+partial,Spread of segment activation rates (SD),0.11469843870864956,0.11874082309503114,0.5965

@@ -72,8 +72,8 @@ def prepare_data(accounts):
     }
 
 
-def _segment_rates(name, pooling, seg):
-    prior = PRIORS[name]
+def _segment_rates(name, pooling, seg, priors):
+    prior = priors[name]
     if pooling == "partial":
         return add_segment_rates(
             name, prior, seg["industry_idx"].to_numpy(), seg["size_idx"].to_numpy()
@@ -90,17 +90,18 @@ def _segment_rates(name, pooling, seg):
     raise ValueError(f"pooling must be one of {POOLING_TYPES}")
 
 
-def build_model(data, pooling="partial"):
+def build_model(data, pooling="partial", priors=PRIORS):
     """Activation and default models for one pooling choice.
 
     The two outcomes share no parameters, so fitting them in one PyMC model
     gives exactly the same answer as fitting them separately.
+    `priors` can be swapped out to test how sensitive the results are to them.
     """
     seg = data["segments"]
     coords = {"segment": seg["segment"].tolist(), "industry": INDUSTRIES, "size_band": SIZE_BANDS}
     with pm.Model(coords=coords) as model:
-        act_rate = _segment_rates("activation", pooling, seg)
-        def_rate = _segment_rates("default", pooling, seg)
+        act_rate = _segment_rates("activation", pooling, seg, priors)
+        def_rate = _segment_rates("default", pooling, seg, priors)
 
         pm.Binomial("activated", n=data["act_n"], p=act_rate, observed=data["act_k"], dims="segment")
         pm.Binomial(
