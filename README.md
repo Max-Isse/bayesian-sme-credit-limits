@@ -264,3 +264,7 @@ src/
 tests/                 generator, priors, models, parameter recovery, sequential, decision
 run_all.py             runs Stages 1-6
 ```
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
